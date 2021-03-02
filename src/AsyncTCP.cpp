@@ -28,6 +28,7 @@ extern "C"{
 #include "lwip/inet.h"
 #include "lwip/dns.h"
 #include "lwip/err.h"
+#include "lwip/ip.h"
 }
 #include "esp_task_wdt.h"
 
@@ -1277,6 +1278,7 @@ void AsyncServer::begin(){
         return;
     }
 
+    ip_set_option(_pcb, SOF_REUSEADDR);
     ip_addr_t local_addr;
     local_addr.type = IPADDR_TYPE_V4;
     local_addr.u_addr.ip4.addr = (uint32_t) _addr;
